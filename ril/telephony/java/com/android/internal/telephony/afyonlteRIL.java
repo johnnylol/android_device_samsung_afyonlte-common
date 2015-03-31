@@ -30,20 +30,26 @@ import java.util.ArrayList;
 import java.util.Collections;
 
 /**
- * RIL customization for Samsung MSM8226 Single-sim devices
+ * RIL customization for Galaxy Avant (GSM) LTE devices
  *
  * {@hide}
  */
-public class SamsungMSM8226RIL extends RIL {
+public class afyonlteRIL extends RIL {
 
     private static final int RIL_REQUEST_DIAL_EMERGENCY = 10016;
     private static final int RIL_UNSOL_RESPONSE_IMS_NETWORK_STATE_CHANGED = 1036;
     private static final int RIL_UNSOL_DEVICE_READY_NOTI = 11008;
     private static final int RIL_UNSOL_AM = 11010;
     private static final int RIL_UNSOL_WB_AMR_STATE = 11017;
-    private static final int RIL_UNSOL_RESPONSE_HANDOVER = 11021;
+    private static final int RIL_UNSOL_SRVCC_HANDOVER = 11029;
+    private static final int RIL_REQUEST_ACTIVATE_DATA_CALL = 11037;
 
-    public SamsungMSM8226RIL(Context context, int networkMode, int cdmaSubscription) {
+    public afyonlteRIL(Context context, int preferredNetworkType,
+            int cdmaSubscription, Integer instanceId) {
+        this(context, preferredNetworkType, cdmaSubscription);
+	}
+
+    public afyonlteRIL(Context context, int networkMode, int cdmaSubscription) {
         super(context, networkMode, cdmaSubscription);
         mQANElements = 6;
     }
@@ -75,6 +81,18 @@ public class SamsungMSM8226RIL extends RIL {
 
         if (RILJ_LOGD) riljLog(rr.serialString() + "> " + requestToString(rr.mRequest));
 
+        send(rr);
+    }
+
+    @Override
+    public void
+    acceptCall (Message result) {
+        RILRequest rr
+                = RILRequest.obtain(RIL_REQUEST_ANSWER, result);
+
+        if (RILJ_LOGD) riljLog(rr.serialString() + "> " + requestToString(rr.mRequest));
+		rr.mParcel.writeInt(1);
+		rr.mParcel.writeInt(0);
         send(rr);
     }
 
@@ -263,7 +281,7 @@ public class SamsungMSM8226RIL extends RIL {
             case RIL_UNSOL_WB_AMR_STATE:
                 ret = responseInts(p);
                 break;
-            case RIL_UNSOL_RESPONSE_HANDOVER:
+            case RIL_UNSOL_SRVCC_HANDOVER:
                 ret = responseVoid(p);
                 break;
             default:
