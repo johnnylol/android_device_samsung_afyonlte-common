@@ -63,8 +63,7 @@ TARGET_PROVIDES_CAMERA_HAL := true
 USE_DEVICE_SPECIFIC_CAMERA := true
 
 # Classpath
-# Remove for LP
-PRODUCT_BOOT_JARS := $(subst $(space),:,$(PRODUCT_BOOT_JARS))
+
 
 # Charger
 BOARD_BATTERY_DEVICE_NAME := "battery"
