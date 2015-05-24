@@ -26,13 +26,12 @@
 TARGET_SPECIFIC_HEADER_PATH := device/samsung/afyonlte-common/include
 
 # Platform
-TARGET_BOARD_PLATFORM := msm8226
 TARGET_BOARD_PLATFORM_GPU := qcom-adreno305
 
 # Architecture
 TARGET_ARCH := arm
 TARGET_NO_BOOTLOADER := true
-TARGET_BOARD_PLATFORM := Qualcomm MSM 8226 (Flattened Device Tree)
+TARGET_BOARD_PLATFORM := Qualcomm MSM 8226 
 TARGET_CPU_ABI := armeabi-v7a
 TARGET_CPU_ABI2 := armeabi
 TARGET_ARCH_VARIANT := armv7-a-neon
