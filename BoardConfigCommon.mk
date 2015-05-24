@@ -30,10 +30,18 @@ TARGET_BOARD_PLATFORM := msm8226
 TARGET_BOARD_PLATFORM_GPU := qcom-adreno305
 
 # Architecture
-TARGET_CPU_VARIANT := krait
+TARGET_ARCH := arm
+TARGET_NO_BOOTLOADER := true
+TARGET_BOARD_PLATFORM := unknown # have to get the info 
+TARGET_CPU_ABI := armeabi-v7a
+TARGET_CPU_ABI2 := armeabi
+TARGET_ARCH_VARIANT := armv7-a-neon
+TARGET_CPU_VARIANT := cortex-a7
+TARGET_CPU_SMP := true
+ARCH_ARM_HAVE_TLS_REGISTER := true
 
 # Bootloader
-TARGET_BOOTLOADER_BOARD_NAME := MSM8226
+TARGET_BOOTLOADER_BOARD_NAME := afyonltetmo
 
 # Kernel
 BOARD_KERNEL_CMDLINE := console=null androidboot.console=null androidboot.hardware=qcom user_debug=31 msm_rtb.filter=0x37
